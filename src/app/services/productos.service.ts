@@ -20,9 +20,12 @@ export class ProductosService {
   cargarTodos() {
       let url = environment.URL_SERVICIOS + "/productos/todos/" + this.pagina;
       this.httpClient.get( url )  .subscribe( (data:respuesta) => {
-        data.productos.forEach(element => {
-          this.productos.push(element);
-        });
+        for(let i=0 ; i<data.productos.length ; i=i+2) {
+          let par:any[] = [];
+          par.push(data.productos[i]);
+          par.push(data.productos[i+1]);
+          this.productos.push(par);
+        }
         console.log(this.productos);
         this.pagina++;
       }, (error) => {
@@ -38,9 +41,12 @@ export class ProductosService {
            resolve(false);
            return;
         }
-        data.productos.forEach(element => {
-          this.productos.push(element);
-        });
+        for(let i=0 ; i<data.productos.length ; i=i+2) {
+          let par:any[] = [];
+          par.push(data.productos[i]);
+          par.push(data.productos[i+1]);
+          this.productos.push(par);
+        }
         console.log(this.productos);
         this.pagina++;
         resolve(true);
