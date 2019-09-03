@@ -9,8 +9,21 @@ import { ProductosService } from "../../services/productos.service";
 })
 export class HomePage {
 
+  hayMas:boolean = true;
+
   constructor( private _ps:ProductosService ) {}
 
-  
+  siguientePagina( event ) {
+    setTimeout(() => {
+      console.log('Done');
+      this._ps.cargarPagina().then(
+        (hayMas:boolean) => {
+          console.log("Hay mas: ",hayMas);
+          this.hayMas = hayMas;
+          event.target.complete();
+        }
+      );
+    }, 500);
+  }
 
 }
