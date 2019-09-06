@@ -10,7 +10,38 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    component: TabsPage
+    component: TabsPage,
+    children: [
+      {
+        path: 'home',
+        children: [
+          {
+            path: '',
+            loadChildren: "../home/home.module#HomePageModule"
+          },
+          {
+            path: 'producto',
+            loadChildren: '../producto/producto.module#ProductoPageModule'
+          }
+        ]
+      },
+      {
+        path: 'categorias',
+        loadChildren: "../categorias/categorias.module#CategoriasPageModule"
+      },
+      {
+        path: 'ordenes',
+        loadChildren: "../ordenes/ordenes.module#OrdenesPageModule"
+      },
+      {
+        path: 'buscar',
+        loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule"
+      },
+      {
+        path: '',
+        redirectTo: "/tabs/home"
+      }
+    ]
   }
 ];
 

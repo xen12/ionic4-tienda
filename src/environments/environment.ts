@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL_SERVICIOS: "http://localhost/rest/index.php"
+  URL_SERVICIOS: "http://localhost/rest/index.php",
+  URL_IMAGEN: "http://localhost/rest/public/img/productos"
 };
 
 /*

@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>producto</ion-title>
+    <ion-buttons slot="start" (click)="navCtrl.pop()">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ producto.producto }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+      <img [src]="producto.codigo | imagen"/>
+    <ion-card-header>
+      <ion-card-title>{{ producto.producto }}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <b> Precio: </b> <span> $ {{ producto.precio_compra }} </span> <br><br>
+      {{ producto.descripcion }} <br><br>
+      <b> {{ producto.linea }} </b>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-button color="primary" expand="block" style="margin: 0 2.5%;">
+    <ion-icon name="cart"> </ion-icon>
+    Agregar al carrito
+  </ion-button>
 </ion-content>

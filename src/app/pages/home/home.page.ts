@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+import { NavController } from "@ionic/angular";
 
 import { ProductosService } from "../../services/productos.service";
 
@@ -11,7 +13,7 @@ export class HomePage {
 
   hayMas:boolean = true;
 
-  constructor( private _ps:ProductosService ) {}
+  constructor( private _ps:ProductosService, private navCtrl:NavController, private router:Router ) {}
 
   siguientePagina( event ) {
     setTimeout(() => {
@@ -24,6 +26,12 @@ export class HomePage {
         }
       );
     }, 500);
+  }
+
+  mostrarProducto( producto ) {
+    //console.log( producto );
+
+    this.router.navigate(['/tabs/home/producto'], {queryParams: producto});
   }
 
 }

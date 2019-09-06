@@ -3,14 +3,18 @@
     <ion-title>
       Mi tienda
     </ion-title>
+    <ion-button fill="clear" slot="end">
+      <ion-icon name="cart"></ion-icon>
+      <ion-badge>6</ion-badge>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row *ngFor="let productos of _ps.productos">
-      <ion-col *ngFor="let item of productos">
-        <img src="http://localhost/rest/public/img/productos/{{ item.codigo }}.jpg" alt="">
+      <ion-col *ngFor="let item of productos" (click)="mostrarProducto(item)">
+        <img [src]="item.codigo | imagen" alt="">
         <p>
           {{ item.producto }}
           <br>
