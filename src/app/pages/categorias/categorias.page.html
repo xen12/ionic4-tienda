@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>categorias</ion-title>
+    <ion-title>Categorías</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item button ion-item *ngFor="let categoria of _ps.lineas" (click)="porCategoria(categoria)" detail>
+      <ion-icon [name]="categoria.icono" slot="start">
+      </ion-icon>
+      <ion-label>
+        {{ categoria.linea }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

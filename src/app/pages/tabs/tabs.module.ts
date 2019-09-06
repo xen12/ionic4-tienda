@@ -27,16 +27,25 @@ const routes: Routes = [
       },
       {
         path: 'categorias',
-        loadChildren: "../categorias/categorias.module#CategoriasPageModule"
+        children: [
+          {
+            path: '',
+            loadChildren: "../categorias/categorias.module#CategoriasPageModule",
+          },
+          {
+            path: 'por-categoria',
+            loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule"
+          }
+        ]
       },
       {
         path: 'ordenes',
         loadChildren: "../ordenes/ordenes.module#OrdenesPageModule"
       },
-      {
-        path: 'buscar',
-        loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule"
-      },
+      // {
+      //   path: 'buscar',
+      //   loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule"
+      // },
       {
         path: '',
         redirectTo: "/tabs/home"

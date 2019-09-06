@@ -10,14 +10,26 @@ export class ProductosService {
 
   pagina:number = 1;
   productos:any[] = [];
+  lineas:any[] = [];
 
   constructor( private httpClient:HttpClient ) {
     this.cargarTodos();
+    this.cargarLineas();
+  }
+
+  cargarLineas() {
+    let url = environment.URL_SERVICIOS + "/lineas";
+    this.httpClient.get( url ).subscribe( (data:respuesta) => {
+      this.lineas = data.lineas;
+      console.log( this.lineas );
+    }, ( error ) => {
+      console.log( error );
+    });
   }
 
   cargarTodos() {
       let url = environment.URL_SERVICIOS + "/productos/todos/" + this.pagina;
-      this.httpClient.get( url )  .subscribe( (data:respuesta) => {
+      this.httpClient.get( url ).subscribe( (data:respuesta) => {
         for(let i=0 ; i<data.productos.length ; i=i+2) {
           let par:any[] = [];
           par.push(data.productos[i]);
@@ -59,5 +71,6 @@ export class ProductosService {
 interface respuesta {
   error:boolean,
   productos?:any[],
-  mensaje?:string
+  mensaje?:string,
+  lineas?:any[]
 }
