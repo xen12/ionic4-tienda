@@ -11,6 +11,7 @@ export class ProductosService {
   pagina:number = 1;
   productos:any[] = [];
   lineas:any[] = [];
+  por_categoria:any[] = [];
 
   constructor( private httpClient:HttpClient ) {
     this.cargarTodos();
@@ -25,6 +26,43 @@ export class ProductosService {
     }, ( error ) => {
       console.log( error );
     });
+  }
+
+  cargarPorCategoria( categoria:number ) {
+    this.por_categoria = [];
+    this.pagina = 1;
+    let url = environment.URL_SERVICIOS + "/productos/por_tipo/" + categoria;
+      this.httpClient.get( url ).subscribe( (data:respuesta) => {
+        data.productos.forEach(element => {
+          this.por_categoria.push(element);
+        });
+        //this.por_categoria.push(data.productos);
+        console.log(this.por_categoria);
+        this.pagina++;
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  cargarPaginaPorCategoria( categoria:number ) {
+    let promesa = new Promise( (resolve, reject) => {
+      let url = environment.URL_SERVICIOS + "/productos/por_tipo/" + categoria + "/" + this.pagina;
+      this.httpClient.get( url ).subscribe( (data:respuesta) => {
+        if( data.productos.length == 0 ) {
+           resolve(false);
+           return;
+        }
+        data.productos.forEach(element => {
+          this.por_categoria.push(element);
+        });
+        //this.por_categoria.push(data.productos);
+        this.pagina++;
+        resolve(true);
+      }, (error) => {
+        console.log(error);
+      });
+    });
+    return promesa;
   }
 
   cargarTodos() {

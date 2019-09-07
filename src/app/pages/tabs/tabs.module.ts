@@ -34,7 +34,16 @@ const routes: Routes = [
           },
           {
             path: 'por-categoria',
-            loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule"
+            children: [
+              {
+                path: '',
+                loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule",
+              },
+              {
+                path: 'producto',
+                loadChildren: '../producto/producto.module#ProductoPageModule'
+              }
+            ]
           }
         ]
       },
