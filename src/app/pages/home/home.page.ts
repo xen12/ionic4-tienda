@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { NavController } from "@ionic/angular";
 
 import { ProductosService } from "../../services/productos.service";
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomePage {
 
   hayMas:boolean = true;
 
-  constructor( private _ps:ProductosService, private navCtrl:NavController, private router:Router ) {}
+  constructor( private _ps:ProductosService, private navCtrl:NavController, private router:Router, private _cs:CarritoService ) {}
 
   siguientePagina( event ) {
     setTimeout(() => {

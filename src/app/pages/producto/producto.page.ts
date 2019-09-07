@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { Producto } from "../../models/producto.interface";
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-producto',
@@ -13,7 +14,7 @@ export class ProductoPage implements OnInit {
 
   producto:Producto;
 
-  constructor( private activatedRoute:ActivatedRoute, private navCtrl:NavController ) { }
+  constructor( private activatedRoute:ActivatedRoute, private navCtrl:NavController, private _cs:CarritoService ) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe( (res:Producto) => {

@@ -5,7 +5,7 @@
     </ion-title>
     <ion-button fill="clear" slot="end">
       <ion-icon name="cart"></ion-icon>
-      <ion-badge>6</ion-badge>
+      <ion-badge class="carrito_numero" color="danger" *ngIf="_cs.items.length > 0"> {{ _cs.items.length }} </ion-badge>
     </ion-button>
   </ion-toolbar>
 </ion-header>
