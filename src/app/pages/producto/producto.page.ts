@@ -19,7 +19,7 @@ export class ProductoPage implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe( (res:Producto) => {
       this.producto = res;
-      console.log( this.producto.producto );
+      //console.log( this.producto.producto );
     });
   }
 

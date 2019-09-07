@@ -19,7 +19,7 @@ export class PorCategoriasPage implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe( (res:Linea) => {
       this.linea = res;
-      console.log(this.linea);
+      //console.log(this.linea);
 
       this._ps.cargarPorCategoria( this.linea.id );
     });
@@ -29,7 +29,7 @@ export class PorCategoriasPage implements OnInit {
     setTimeout(() => {
       this._ps.cargarPaginaPorCategoria( this.linea.id ).then(
         (hayMas:boolean) => {
-          console.log("Hay mas: ",hayMas);
+          //console.log("Hay mas: ",hayMas);
           this.hayMas = hayMas;
           event.target.complete();
         }

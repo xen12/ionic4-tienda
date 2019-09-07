@@ -16,6 +16,8 @@ import { CarritoService } from "./services/carrito.service";
 import { ProductosService } from "./services/productos.service";
 import { UsuarioService } from "./services/usuario.service";
 
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,7 +28,8 @@ import { UsuarioService } from "./services/usuario.service";
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CarritoService,
     ProductosService,
-    UsuarioService
+    UsuarioService,
+    NativeStorage
   ],
   bootstrap: [AppComponent]
 })

@@ -22,7 +22,7 @@ export class ProductosService {
     let url = environment.URL_SERVICIOS + "/lineas";
     this.httpClient.get( url ).subscribe( (data:respuesta) => {
       this.lineas = data.lineas;
-      console.log( this.lineas );
+      //console.log( this.lineas );
     }, ( error ) => {
       console.log( error );
     });
@@ -37,7 +37,7 @@ export class ProductosService {
           this.por_categoria.push(element);
         });
         //this.por_categoria.push(data.productos);
-        console.log(this.por_categoria);
+        //console.log(this.por_categoria);
         this.pagina++;
       }, (error) => {
         console.log(error);
@@ -74,7 +74,7 @@ export class ProductosService {
           par.push(data.productos[i+1]);
           this.productos.push(par);
         }
-        console.log(this.productos);
+        //console.log(this.productos);
         this.pagina++;
       }, (error) => {
         console.log(error);
@@ -95,7 +95,7 @@ export class ProductosService {
           par.push(data.productos[i+1]);
           this.productos.push(par);
         }
-        console.log(this.productos);
+        //console.log(this.productos);
         this.pagina++;
         resolve(true);
       }, (error) => {

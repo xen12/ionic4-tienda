@@ -18,10 +18,10 @@ export class HomePage {
 
   siguientePagina( event ) {
     setTimeout(() => {
-      console.log('Done');
+      //console.log('Done');
       this._ps.cargarPagina().then(
         (hayMas:boolean) => {
-          console.log("Hay mas: ",hayMas);
+          //console.log("Hay mas: ",hayMas);
           this.hayMas = hayMas;
           event.target.complete();
         }
