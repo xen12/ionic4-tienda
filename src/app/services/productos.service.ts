@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../environments/environment";
+import { respuesta } from '../models/respuesta.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -104,11 +105,4 @@ export class ProductosService {
     });
     return promesa;
   }
-}
-
-interface respuesta {
-  error:boolean,
-  productos?:any[],
-  mensaje?:string,
-  lineas?:any[]
 }

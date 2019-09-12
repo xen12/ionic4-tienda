@@ -19,7 +19,6 @@ export class CarritoService {
   }
 
   async ver_carrito() {
-    console.log("entreee");
     if( this._us.token ) {
       // Mostrar página del carrito
       const login_modal = await this.modalCtrl.create({
