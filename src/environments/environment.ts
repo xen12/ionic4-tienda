@@ -2,10 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const ip:string = "localhost";
+
 export const environment = {
   production: false,
-  URL_SERVICIOS: "http://192.168.1.8/rest/index.php",
-  URL_IMAGEN: "http://192.168.1.8/rest/public/img/productos"
+  URL_SERVICIOS: "http://" + ip + "/rest/index.php",
+  URL_IMAGEN: "http://" + ip + "/rest/public/img/productos"
 };
 
 /*

@@ -18,9 +18,12 @@ import { UsuarioService } from "./services/usuario.service";
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+import { CarritoPage } from './components/carrito/carrito.page';
+import { LoginPage } from './components/login/login.page';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, CarritoPage, LoginPage],
+  entryComponents: [CarritoPage, LoginPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
