@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-carrito',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoPage implements OnInit {
 
-  constructor() { }
+  constructor( private modalCtrl:ModalController ) { }
 
   ngOnInit() {
   }

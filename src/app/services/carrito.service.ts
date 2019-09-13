@@ -21,16 +21,16 @@ export class CarritoService {
   async ver_carrito() {
     if( this._us.token ) {
       // Mostrar página del carrito
-      const login_modal = await this.modalCtrl.create({
+      const carrito_modal = await this.modalCtrl.create({
         component: CarritoPage
       });
-      login_modal.present();
+      carrito_modal.present();
     } else {
       // Mostrar el login
-      const carrito_modal = await this.modalCtrl.create({
+      const login_modal = await this.modalCtrl.create({
         component: LoginPage
       });
-      carrito_modal.present();
+      login_modal.present();
     }
 
     // modal.onDidDismiss( (abrirCarrito:boolean) => {

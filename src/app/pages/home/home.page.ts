@@ -4,6 +4,7 @@ import { NavController } from "@ionic/angular";
 
 import { ProductosService } from "../../services/productos.service";
 import { CarritoService } from '../../services/carrito.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomePage {
 
   hayMas:boolean = true;
 
-  constructor( private _ps:ProductosService, private navCtrl:NavController, private router:Router, private _cs:CarritoService ) {}
+  constructor( private _ps:ProductosService, private navCtrl:NavController, private router:Router, private _cs:CarritoService, private _us:UsuarioService ) {}
 
   siguientePagina( event ) {
     setTimeout(() => {
