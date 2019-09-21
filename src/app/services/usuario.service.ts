@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { AlertController, Platform, ModalController } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
-import { CarritoPage } from '../components/carrito/carrito.page';
+// import { CarritoPage } from '../components/carrito/carrito.page';
 
 @Injectable({
   providedIn: 'root'
@@ -61,17 +61,17 @@ export class UsuarioService {
         this.guardarStorage();
         this.modalCtrl.dismiss();
 
-        this.redireccionar_carrito();
+        // this.redireccionar_carrito();
       }
     });
   }
 
-  async redireccionar_carrito() {
-    const modal = await this.modalCtrl.create({
-      component: CarritoPage
-    });
-    await modal.present();
-  }
+  // async redireccionar_carrito() {
+  //   const modal = await this.modalCtrl.create({
+  //     component: CarritoPage
+  //   });
+  //   await modal.present();
+  // }
 
   cerrar_sesion() {
     this.token = null;
