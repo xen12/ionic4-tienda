@@ -27,7 +27,7 @@ export class UsuarioService {
   }
 
   ingresar( correo:string, contrasena:string ) {
-    // console.log( "entreee" );
+    
     let data = new FormData();
     data.append("correo", correo);
     data.append("contrasena", contrasena);
@@ -47,23 +47,7 @@ export class UsuarioService {
     //   }
     // }));
 
-    return this.httpClient.post( url, data ).subscribe( (resp:respuesta) => {
-      //let data_resp = resp;
-      console.log( resp );
-
-      if( resp.error ) {
-        this.mostrar_alert( resp.mensaje );
-      } else {
-        this.token = resp.token;
-        this.id_usuario = resp.id_usuario;
-        
-        // Guardar en Storage
-        this.guardarStorage();
-        this.modalCtrl.dismiss();
-
-        // this.redireccionar_carrito();
-      }
-    });
+    return this.httpClient.post( url, data )
   }
 
   // async redireccionar_carrito() {
@@ -81,7 +65,7 @@ export class UsuarioService {
     this.guardarStorage();
   }
 
-  private guardarStorage() {
+  guardarStorage() {
     if ( this.platform.is("cordova") ) {
       // Dispositivo
       this.nativeStorage.setItem( "token", this.token );

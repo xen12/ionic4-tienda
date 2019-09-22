@@ -4,8 +4,8 @@ import { AlertController, Platform, ModalController } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { UsuarioService } from './usuario.service';
-import { LoginPage } from '../components/login/login.page';
-import { CarritoPage } from '../components/carrito/carrito.page';
+// import { LoginPage } from '../components/login/login.page';
+// import { CarritoPage } from '../components/carrito/carrito.page';
 
 @Injectable({
   providedIn: 'root'
@@ -13,33 +13,11 @@ import { CarritoPage } from '../components/carrito/carrito.page';
 export class CarritoService {
 
   items:any[] = [];
+  total_carrito:number = 0;
 
   constructor( private alertCtrl:AlertController, private platform:Platform, private nativeStorage:NativeStorage, private _us:UsuarioService, private modalCtrl:ModalController ) {
     this.cargarStorage();
-  }
-
-  async ver_carrito() {
-    if( this._us.token ) {
-      // Mostrar página del carrito
-      const carrito_modal = await this.modalCtrl.create({
-        component: CarritoPage
-      });
-      carrito_modal.present();
-    } else {
-      // Mostrar el login
-      const login_modal = await this.modalCtrl.create({
-        component: LoginPage
-      });
-      login_modal.present();
-    }
-
-    // modal.onDidDismiss( (abrirCarrito:boolean) => {
-    //   if( abrirCarrito ) {
-    //     this.modalCtrl.create({
-    //       component: CarritoPage
-    //     });
-    //   }
-    // });
+    this.actualizar_total();
   }
 
   async agregarCarrito( item_parametro:any ) {
@@ -56,7 +34,15 @@ export class CarritoService {
     }
 
     this.items.push( item_parametro );
+    this.actualizar_total();
     this.guardarStorage();
+  }
+
+  actualizar_total() {
+    this.total_carrito = 0;
+    for( let item of this.items ) {
+      this.total_carrito += Number( item.precio_compra );
+    }
   }
 
   private guardarStorage() {

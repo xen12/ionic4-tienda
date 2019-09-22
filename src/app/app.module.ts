@@ -22,10 +22,12 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { CarritoPage } from './components/carrito/carrito.page';
 import { LoginPage } from './components/login/login.page';
 
+import { PipesModule } from "./pipes/pipes.module";
+
 @NgModule({
   declarations: [AppComponent, CarritoPage, LoginPage],
   entryComponents: [CarritoPage, LoginPage],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, PipesModule],
   providers: [
     StatusBar,
     SplashScreen,

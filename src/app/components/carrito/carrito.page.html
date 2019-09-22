@@ -9,10 +9,42 @@
 
 <ion-content class="ion-padding">
   
-  <div text-center>
+  <div text-center *ngIf="!_us.token">
     <ion-icon name="cart" style="height: 100px; width: 100px; margin-top: 30%;"></ion-icon>
     <br>
     Su carrito esta vacío
+  </div>
+
+  <div *ngIf="_cs.items.length > 0">
+    <ion-grid>
+      <ion-row *ngFor="let item of _cs.items">
+        <ion-col>
+          <img [src]="item.codigo | imagen" alt="">
+        </ion-col>
+        <ion-col>
+          <p> {{ item.producto }} </p>
+          <p> {{ item.precio_compra }} $ </p>
+          <ion-button color="danger" fill="outline" size="small">
+            Eliminar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <hr>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3> Total: </h3>
+          {{ _cs.total_carrito }} $
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button expand="block">
+      Realizar pedido
+    </ion-button>
   </div>
 
 </ion-content>
