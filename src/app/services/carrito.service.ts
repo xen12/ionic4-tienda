@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AlertController, Platform, ModalController } from '@ionic/angular';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+import { environment } from '../../environments/environment';
 import { UsuarioService } from './usuario.service';
+import { Alert } from 'selenium-webdriver';
+import { respuesta } from '../models/respuesta.interface';
 // import { LoginPage } from '../components/login/login.page';
 // import { CarritoPage } from '../components/carrito/carrito.page';
 
@@ -15,7 +19,7 @@ export class CarritoService {
   items:any[] = [];
   total_carrito:number = 0;
 
-  constructor( private alertCtrl:AlertController, private platform:Platform, private nativeStorage:NativeStorage, private _us:UsuarioService, private modalCtrl:ModalController ) {
+  constructor( private alertCtrl:AlertController, private platform:Platform, private nativeStorage:NativeStorage, private _us:UsuarioService, private modalCtrl:ModalController, private hhtp:HttpClient ) {
     this.cargarStorage();
     this.actualizar_total();
   }
@@ -36,6 +40,37 @@ export class CarritoService {
     this.items.push( item_parametro );
     this.actualizar_total();
     this.guardarStorage();
+  }
+
+  remover_item( idx:number ) {
+    this.items.splice( idx, 1 );
+    this.guardarStorage();
+  }
+
+  async realizar_pedido() {
+    let data = new FormData();
+    let codigos:string[] = [];
+
+    for( let item of this.items ) {
+      codigos.push( item.codigo );
+    }
+
+    data.append( 'items', codigos.join(',') )
+
+    let url = `${ environment.URL_SERVICIOS }/pedidos/realizar_orden/${ this._us.token }/${ this._us.id_usuario }`
+    this.hhtp.post( url, data ).subscribe( ( resp:respuesta ) => {
+      // todo bien!
+      console.log(resp);
+      if( !resp.error ) {
+        this.items = [];
+        this.mostrar_alert( "Orden realizada!", "Nos contactaremos con usted proximamente." );
+      } else {
+        this.mostrar_alert( "Error en la orden", resp.mensaje );
+      }
+    }, (error) => {
+      // Mostrar error
+      
+    });
   }
 
   actualizar_total() {
@@ -75,5 +110,23 @@ export class CarritoService {
       }
     });
     return promesa;
+  }
+
+  async pedido_alert() {
+    const alert = await this.alertCtrl.create({
+      header: "Orden realizada!",
+      subHeader: "Nos contactaremos con usted proximamente.",
+      buttons: ["OK"]
+    });
+    return alert.present();
+  }
+
+  async mostrar_alert( title:string, subtitle:string ) {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      subHeader: subtitle,
+      buttons: ["OK"]
+    });
+    return alert.present();
   }
 }
