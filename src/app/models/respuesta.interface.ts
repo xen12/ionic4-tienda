@@ -4,5 +4,6 @@ export interface respuesta {
     mensaje?:string,
     lineas?:any[],
     token?:string,
-    id_usuario?:string
+    id_usuario?:string,
+    ordenes?:any[]
   }

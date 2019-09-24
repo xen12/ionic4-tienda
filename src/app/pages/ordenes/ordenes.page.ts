@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-ordenes',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdenesPage implements OnInit {
 
-  constructor() { }
+  constructor( private _cs:CarritoService, private router:Router ) { }
 
   ngOnInit() {
+    this._cs.cargar_ordenes();
   }
 
 }

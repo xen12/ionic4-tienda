@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Orden } from '../../models/orden.interface';
 
 @Component({
   selector: 'app-ordenes-detalle',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdenesDetallePage implements OnInit {
 
-  constructor() { }
+  orden:Orden;
+
+  constructor( private activatedRoute:ActivatedRoute ) { }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe( (res:Orden) => {
+      this.orden = res;
+      console.log( this.orden );
+    });
   }
 
 }

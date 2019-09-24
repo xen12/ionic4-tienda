@@ -49,7 +49,16 @@ const routes: Routes = [
       },
       {
         path: 'ordenes',
-        loadChildren: "../ordenes/ordenes.module#OrdenesPageModule"
+        children: [
+          {
+            path: '',
+            loadChildren: "../ordenes/ordenes.module#OrdenesPageModule"
+          },
+          {
+            path: 'orden-detalle',
+            loadChildren: "../ordenes-detalle/ordenes-detalle.module#OrdenesDetallePageModule"
+          }
+        ]
       },
       // {
       //   path: 'buscar',

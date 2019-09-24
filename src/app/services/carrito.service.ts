@@ -18,8 +18,9 @@ export class CarritoService {
 
   items:any[] = [];
   total_carrito:number = 0;
+  ordenes:any[] = [];
 
-  constructor( private alertCtrl:AlertController, private platform:Platform, private nativeStorage:NativeStorage, private _us:UsuarioService, private modalCtrl:ModalController, private hhtp:HttpClient ) {
+  constructor( private alertCtrl:AlertController, private platform:Platform, private nativeStorage:NativeStorage, private _us:UsuarioService, private modalCtrl:ModalController, private http:HttpClient ) {
     this.cargarStorage();
     this.actualizar_total();
   }
@@ -58,11 +59,16 @@ export class CarritoService {
     data.append( 'items', codigos.join(',') )
 
     let url = `${ environment.URL_SERVICIOS }/pedidos/realizar_orden/${ this._us.token }/${ this._us.id_usuario }`
-    this.hhtp.post( url, data ).subscribe( ( resp:respuesta ) => {
+    this.http.post( url, data ).subscribe( ( resp:respuesta ) => {
       // todo bien!
       console.log(resp);
       if( !resp.error ) {
         this.items = [];
+        if( this.platform.is("cordova") ) {
+          this.nativeStorage.remove( "items");
+        } else {
+          localStorage.removeItem("items");
+        }
         this.mostrar_alert( "Orden realizada!", "Nos contactaremos con usted proximamente." );
       } else {
         this.mostrar_alert( "Error en la orden", resp.mensaje );
@@ -128,5 +134,18 @@ export class CarritoService {
       buttons: ["OK"]
     });
     return alert.present();
+  }
+
+  cargar_ordenes() {
+    let url = `${ environment.URL_SERVICIOS }/pedidos/obtener_pedidos/${ this._us.token }/${ this._us.id_usuario }`;
+
+    this.http.get( url ).subscribe( ( resp:respuesta ) =>{
+      // console.log( "gg", resp );
+      if( !resp.error ) {
+        this.ordenes = resp.ordenes;
+      } else {
+        // Manejar el error
+      }
+    });
   }
 }
