@@ -148,4 +148,9 @@ export class CarritoService {
       }
     });
   }
+
+  borrar_orden( orden_id:string ) {
+    let url = `${ environment.URL_SERVICIOS }/pedidos/borrar_pedido/${ this._us.token }/${ this._us.id_usuario }/${ orden_id }`;
+    return this.http.delete( url );
+  }
 }

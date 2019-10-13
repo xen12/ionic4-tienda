@@ -16,4 +16,8 @@ export class OrdenesPage implements OnInit {
     this._cs.cargar_ordenes();
   }
 
+  ordenDetalle( orden ) {
+    this.router.navigate( ['/tabs/ordenes/orden-detalle'], { queryParams: { orden: JSON.stringify(orden) } } );
+  }
+
 }

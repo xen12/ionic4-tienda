@@ -6,7 +6,7 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item button ion-item *ngFor="let orden of _cs.ordenes" detail [routerLink]="['/tabs/ordenes/orden-detalle']" [queryParams]="orden">
+    <ion-item button ion-item *ngFor="let orden of _cs.ordenes" detail (click)="ordenDetalle(orden)">
       <ion-label>
           <b> Orden ID: </b>
           {{ orden.id }}
