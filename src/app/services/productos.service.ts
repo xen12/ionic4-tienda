@@ -13,6 +13,7 @@ export class ProductosService {
   productos:any[] = [];
   lineas:any[] = [];
   por_categoria:any[] = [];
+  res_busqueda:any[] = [];
 
   constructor( private httpClient:HttpClient ) {
     this.cargarTodos();
@@ -97,6 +98,51 @@ export class ProductosService {
           this.productos.push(par);
         }
         //console.log(this.productos);
+        this.pagina++;
+        resolve(true);
+      }, (error) => {
+        console.log(error);
+      });
+    });
+    return promesa;
+  }
+
+  busquedaProducto( texto:string ) {
+    if( texto == "" ) {
+      this.res_busqueda = [];
+      return;
+    }
+    this.res_busqueda = [];
+    this.pagina = 1;
+    let url = environment.URL_SERVICIOS + "/productos/buscar/" + texto;
+      this.httpClient.get( url ).subscribe( (data:respuesta) => {
+        data.productos.forEach(element => {
+          this.res_busqueda.push(element);
+        });
+        //this.por_categoria.push(data.productos);
+        //console.log(this.por_categoria);
+        this.pagina++;
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  cargarPaginaBusquedaProducto( texto:string ) {
+    if( texto == "" ) {
+      this.res_busqueda = [];
+      return;
+    }
+    let promesa = new Promise( (resolve, reject) => {
+      let url = environment.URL_SERVICIOS + "/productos/buscar/" + texto + "/" + this.pagina;
+      this.httpClient.get( url ).subscribe( (data:respuesta) => {
+        if( data.productos.length == 0 ) {
+           resolve(false);
+           return;
+        }
+        data.productos.forEach(element => {
+          this.res_busqueda.push(element);
+        });
+        //this.por_categoria.push(data.productos);
         this.pagina++;
         resolve(true);
       }, (error) => {

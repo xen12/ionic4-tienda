@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'por-categorias', loadChildren: './pages/por-categorias/por-categorias.module#PorCategoriasPageModule' },
   { path: 'producto', loadChildren: './pages/producto/producto.module#ProductoPageModule' },
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+  { path: 'busqueda', loadChildren: './pages/busqueda/busqueda.module#BusquedaPageModule' },
 ];
 
 @NgModule({

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Búsqueda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-searchbar value="" (ionInput)="buscarProducto($event)"></ion-searchbar>
+
+<ion-content class="ion-padding">
+
+    <ion-list>
+      <ion-item *ngFor="let item of _ps.res_busqueda">
+        <ion-thumbnail slot="start">
+          <img [src]="item.codigo | imagen">
+        </ion-thumbnail>
+        <ion-label>
+          <h4> {{ item.producto }} </h4>
+          <p> {{ item.proveedor }} </p>
+        </ion-label>
+        <ion-button fill="clear" [routerLink]="['/tabs/busqueda/producto']" [queryParams]="item">
+          Ver
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="siguientePagina($event)" [disabled]="!hayMas">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Cargando más datos ...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -60,10 +60,19 @@ const routes: Routes = [
           }
         ]
       },
-      // {
-      //   path: 'buscar',
-      //   loadChildren: "../por-categorias/por-categorias.module#PorCategoriasPageModule"
-      // },
+      {
+        path: 'busqueda',
+        children: [
+          {
+            path: '',
+            loadChildren: "../busqueda/busqueda.module#BusquedaPageModule",
+          },
+          {
+            path: 'producto',
+            loadChildren: '../producto/producto.module#ProductoPageModule'
+          }
+        ]
+      },
       {
         path: '',
         redirectTo: "/tabs/home"
